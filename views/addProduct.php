@@ -1,26 +1,10 @@
 <?php
 
-  //require_once "model/ProductDAO.php";
+  require_once "../model/ProductDAO.php";
   showErrors(0);
-
+  
   $productDAO = new ProductDAO();
-  $method = $_SERVER['REQUEST_METHOD'];
-  if ($method == 'POST') {
-      $categoryID = $_POST['categoryID'];
-      $productCode = $_POST['productCode'];
-      $productName = $_POST['productName'];
-      $listPrice = $_POST['listPrice'];
-      $product = new Product();
-      $product->setCategoryID($categoryID);
-      $product->setProductCode($productCode);
-      $product->setProductName($productName);
-      $product->setListPrice($listPrice);
-
-      $productDAO->addProduct($product);
-
-      header("Location: /CS2033/controller.php?page=list");
-      exit;
-  }
+  
 
   function showErrors($debug) {
       if ($debug == 1) {
@@ -54,7 +38,7 @@
             <h5 class="card-title">Add a Product</h5>
             <p class="card-text">Fill in the form below to add a new product.</p>
 
-            <form action="../CS2033/controller.php?page=ADD" method="POST">
+            <form action="../controller.php?page=ADD" method="POST">
               <label for="categoryID" class="form-label">Category ID</label>
               <input type="number" class="form-control mb-3" id="categoryID" name="categoryID" required>
 

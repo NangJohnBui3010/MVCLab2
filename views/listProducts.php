@@ -1,25 +1,6 @@
 <?php
-//require_once '../model/ProductDAO.php';
+require_once __DIR__ . '/../model/ProductDAO.php';
 
-if (isset($_GET['submit'])) {
-    $submit = $_GET['submit'];
-    $id = $_GET['productID'] ?? null;
-
-    if ($submit == "ADD") {
-        header("Location: ../CS2033/controller.php?page=ADD");
-        exit;
-    }
-
-    if ($submit == "DELETE" && $id) {
-        header("Location: ../CS2033/controller.php?page=DELETE&productID=" . $id);
-        exit;
-    }
-
-    if ($submit == "UPDATE" && $id) {
-        header("Location: ../CS2033/controller.php?page=UPDATE&productID=" . $id);
-        exit;
-    }
-}
 
 $productDAO = new ProductDAO();
 $products = $productDAO->getProducts();
@@ -40,11 +21,11 @@ $products = $productDAO->getProducts();
 
 <div class="container">
     <div class="col">
-        <form action="controller.php" method="GET">
-            <button class="btn btn-primary" type="submit" name="submit" value="ADD">Add A Product</button>
-            <button class="btn btn-warning" type="submit" name="submit" value="UPDATE"
+        <form action="../controller.php" method="GET">
+            <button class="btn btn-primary" type="submit" name="page" value="ADD">Add A Product</button>
+            <button class="btn btn-warning" type="submit" name="page" value="UPDATE"
                     onclick="return confirm('Are you sure you want to update this product?');">Update Product</button>
-            <button class="btn btn-danger" type="submit" name="submit" value="DELETE"
+            <button class="btn btn-danger" type="submit" name="page" value="DELETE"
                     onclick="return confirm('Are you sure you want to delete this product?');">Delete A Product</button>
             <table class="table table-bordered table-striped mt-3">
                 <thead>

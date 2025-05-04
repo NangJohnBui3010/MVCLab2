@@ -14,27 +14,28 @@ class FrontControllers {
 
     public function run() {
         $method = $_SERVER['REQUEST_METHOD'];
-        $page = isset($_GET['page']) ? $_GET['page'] : 'list';
+        $page = $_REQUEST['page'];
+        
         $key = $method . $page;
-
         if(!array_key_exists($key, $this->controllers)){
-            header("Location: /CS2033/controller.php?page=list");
+            header("Location: controller.php?page=LIST");
             return;
         }
 
         $controller = $this->controllers[$key];
 
-        if ($method == 'GET') {
+        $methodType = strtoupper(substr($method,0,4));
+        if ($methodType == 'GET') {
             $controller->processGET();
         }
 
-        if ($method == 'POST') {
+        if ($methodType == 'POST') {
             $controller->processPOST();
         }
     }
 
     public function loadControllers() {
-        $controllers["GETlist"] = new ProductList();
+        $controllers["GETLIST"] = new ProductList();
         $controllers["GETADD"] = new ProductAdd();
         $controllers["POSTADD"] = new ProductAdd();
         $controllers["GETUPDATE"] = new ProductUpdate();

@@ -4,20 +4,6 @@
     if (isset($_GET['productID'])) {
         $productID = $_GET['productID'];
     }
-
-    $method = $_SERVER['REQUEST_METHOD'];
-    if ($method == 'POST') {
-        $productID = $_POST['productID'];
-        $submit = $_POST['submit'];
-
-        if ($submit == 'CONFIRM') {
-            $productDAO = new ProductDAO();
-            $productDAO->deleteProduct($productID);
-        }
-
-        header("Location: /CS2033/controller.php?page=list");
-        exit;
-    }
 ?>
 
     <!DOCTYPE html>
@@ -43,7 +29,7 @@
                             <h5 class="card-title">Delete a Product</h5>
                             <p class="card-text">Are you sure you want to delete this product from the database?</p>
 
-                            <form action="../CS2033/controller.php?page=DELETE" method="POST">
+                            <form action="controller.php?page=DELETE" method="POST">
                                 <input type="hidden" name="productID" value="<?php echo $productID; ?>">
                                 <button class="btn btn-primary" type="submit" name="submit" value="CONFIRM">Confirm</button>
                                 <button class="btn btn-secondary" type="submit" name="submit" value="CANCEL">Cancel</button>

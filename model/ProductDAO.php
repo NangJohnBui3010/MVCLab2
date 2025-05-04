@@ -19,7 +19,11 @@
         public function addProduct($product) {
             $connection = $this->getConnection();
             $stmt = $connection->prepare("INSERT INTO products (categoryID, productCode, productName, listPrice) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("isss",$product->getCategoryID(),$product->getProductCode(), $product->getProductName(), $product->getListPrice());
+            $categoryID = $product->getCategoryID();
+            $productCode = $product->getProductCode();
+            $productName = $product->getProductName();
+            $listPrice = $product->getListPrice();
+            $stmt->bind_param("isss",$categoryID,$productCode, $productName, $listPrice);
             $stmt->execute();
             $stmt->close();
             $connection->close();

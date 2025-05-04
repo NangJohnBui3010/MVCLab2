@@ -1,5 +1,5 @@
 <?php
-    //require "../model/ProductDAO.php";
+    require_once __DIR__ . "/../model/ProductDAO.php";
 
     if (isset($_GET['productID'])) {
         $productID = $_GET['productID'];
@@ -10,28 +10,6 @@
 
     if (!$product) {
         header('Location: listProducts.php');
-        exit;
-    }
-
-    $method = $_SERVER['REQUEST_METHOD'];
-    if ($method == 'POST') {
-        $productID = $_POST['productID'];
-        $categoryID = $_POST['categoryID'];
-        $productCode = $_POST['productCode'];
-        $productName = $_POST['productName'];
-        $listPrice = $_POST['listPrice'];
-        $submit = $_POST['submit'];
-
-        if ($submit == 'UPDATE') {
-            $product->setProductID($productID);
-            $product->setCategoryID($categoryID);
-            $product->setProductCode($productCode);
-            $product->setProductName($productName);
-            $product->setListPrice($listPrice);
-
-            $productDAO->updateProduct($product);
-        }
-        header("Location: /CS2033/controller.php?page=list");
         exit;
     }
 
@@ -56,7 +34,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Update a Product</h5>
-                    <form action="../CS2033/controller.php?page=UPDATE" method="POST">
+                    <form action="controller.php?page=UPDATE" method="POST">
                         <input type="hidden" name="productID" value="<?php echo $product->getProductID(); ?>">
 
                         <div class="mb-3">

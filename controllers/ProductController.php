@@ -17,7 +17,7 @@
 
     class ProductAdd implements ProductAction {
         function processGET() {
-            include "views/addProduct.php";
+            header('location: views/addProduct.php');
         }
 
         function processPOST() {
@@ -38,7 +38,8 @@
             $productDAO = new ProductDAO();
             $productDAO->addProduct($product);
             
-            header("Location: /CS2033/controller.php?page=list");
+            
+            header('Location: views/listProducts.php');
             ob_end_clean();
             exit;
         }
@@ -71,7 +72,7 @@
 
             $productDAO->updateProduct($product);
             
-            header("Location: /CS2033/controller.php?page=list");
+            header("Location: views/listProducts.php");
             ob_end_clean();
             exit;
         }
@@ -96,7 +97,7 @@
                 $productDAO->deleteProduct($productID);
             }
 
-            header("Location: /CS2033/controller.php?page=list");
+            header("Location: views/listProducts.php");
             ob_end_clean();
             exit;
         }
